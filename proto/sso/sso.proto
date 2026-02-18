@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package auth;
+
+option  go_package = "sofron.sso.v1;ssov1";
+
+// Auth service
+service Auth {
+  // Register ...
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  // Login ..
+  rpc Login (LoginRequest) returns (LoginResponse);
+  // IsAdmin ..
+  rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);
+}
+
+message  RegisterRequest{
+  string email = 1; // Email of the user to register.
+  string password = 2; // password of the user to register.
+
+}
+
+message RegisterResponse {
+  int64 user_id = 1; // User ID the registered user.
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+  int32 app_id = 3;
+}
+
+message LoginResponse {
+  string tokken = 1;
+}
+
+message IsAdminRequest {
+  int64 user_id = 1;
+}
+
+message  IsAdminResponse {
+  bool is_admin =1 ;
+}
